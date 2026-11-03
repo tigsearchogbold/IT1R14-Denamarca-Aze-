@@ -8,26 +8,20 @@ int main() {
     char name[100];
     char course[100];
     int age;
-
-    // --- PHASE 1: WRITING TO THE DATABASE ---
     printf("Writing Student Database:\n");
     printf("How many students do you want to record? ");
     if (scanf("%d", &num_students) != 1) {
         printf("Invalid input.\n");
         return 1;
     }
-    
-    // Consume the trailing newline character left in the buffer by scanf
-    getchar(); 
+        getchar(); 
 
-    // Open the file in write mode "w"
+
     file = fopen("student_records.txt", "w");
     if (file == NULL) {
         printf("Error: Could not create student_records.txt\n");
         return 1;
     }
-
-    // Loop to collect information based on user entry
     for (int i = 1; i <= num_students; i++) {
         printf("\nStudent %d\n", i);
         
@@ -43,7 +37,8 @@ int main() {
         fgets(course, sizeof(course), stdin);
         course[strcspn(course, "\n")] = '\0'; // Strip the trailing newline
 
-        // Write the formatted record to the text file
+//ambot onsa ni basta ga gana
+
         fprintf(file, "Student %d\n", i);
         fprintf(file, "Name: %s\n", name);
         fprintf(file, "Age: %d\n", age);
@@ -51,15 +46,13 @@ int main() {
         fprintf(file, "-----------------------\n\n");
     }
 
-    // Properly close the file after writing
+
     fclose(file);
     printf("\nStudent database successfully saved to file.\n\n");
 
 
-    // --- PHASE 2: READING FROM THE DATABASE ---
-    printf("Reading Student Database:\n\n");
 
-    // Open the file in read mode "r"
+    printf("Reading Student Database:\n\n");
     file = fopen("student_records.txt", "r");
     if (file == NULL) {
         printf("Error: Could not open student_records.txt for reading\n");
@@ -71,6 +64,12 @@ int main() {
     while (fgets(line, sizeof(line), file) != NULL) {
         printf("%s", line);
     }
+
+    fclose(file);
+
+    return 0;
+}
+
 
     // Properly close the file after reading
     fclose(file);
